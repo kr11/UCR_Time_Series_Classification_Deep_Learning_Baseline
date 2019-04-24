@@ -121,7 +121,7 @@ def readucr(filename):
 flist = [
     'Adiac', 'Beef', 'CBF', 'ChlorineConcentration',
     'CinC_ECG_torso', 'Coffee', 'Cricket_X', 'Cricket_Y', 'Cricket_Z',
-    'DiatomSizeReduc tion', 'ECGFiveDays', 'FaceAll', 'FaceFour', 'FacesUCR', '50words', 'FISH', 'Gun_Point', 'Haptics',
+    'DiatomSizeReduction', 'ECGFiveDays', 'FaceAll', 'FaceFour', 'FacesUCR', '50words', 'FISH', 'Gun_Point', 'Haptics',
     'InlineSkate', 'ItalyPowerDemand', 'Lighting2', 'Lighting7', 'MALLAT', 'MedicalImages', 'MoteStrain',
     'NonInvasiveFatalECG_Thorax1',
     'NonInvasiveFatalECG_Thorax2', 'OliveOil', 'OSULeaf', 'SonyAIBORobotSurface', 'SonyAIBORobotSurfaceII',
@@ -152,13 +152,13 @@ task_num = int(len(flist) // worker_num)
 if opt.one_dataset is not None:
     sub_flist = [opt.one_dataset]
 else:
-    sub_flist = flist[worker_idx * task_num: worker_idx + 1 * task_num]
+    sub_flist = flist[worker_idx * task_num: (worker_idx + 1) * task_num]
     if worker_idx == worker_num - 1:
         sub_flist = flist[worker_idx * task_num:]
-print(sub_flist)
 
 logger = get_log(opt.log_dir, "Res_%s_%d_%d" % (opt.annotation, worker_num, worker_idx))
 
+logger.info(sub_flist)
 for each in sub_flist:
     st = time.time()
     logger.info("dataset: %s, start time: %.3f" % (each, st))
